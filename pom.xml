@@ -27,6 +27,16 @@
             <version>3.23.1</version>
         </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>snapshots</id>
+            <name>ip-172-31-15-99.ec2.internal-snapshots</name>
+            <url>http://3.236.186.210:8081/artifactory/libs-snapshot</url>
+        </repository>
+    </repositories>
 
     <!-- This blob of configuration tells Maven to make the jar executable. You can run it with:
     mvn clean package
