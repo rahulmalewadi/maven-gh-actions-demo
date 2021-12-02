@@ -21,7 +21,7 @@ jobs:
         java-version: 1.8
         server-id: snapshots # value of repository/id field of the pom.xml
         server-username: ARTIFACTORY_USERNAME_REF  # env variable name for username of Artifactory server; value can be anything as it is a transient user
-        server-password: ARTIFACTORY_TOKEN_REF # env variable name for Artifactory access token
+        server-password: eyJ2ZXIiOiIyIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYiLCJraWQiOiJXbmxyczlxd19iM1ZjRGl1T0x0S09pcWRqQXlQWVZHY1VrRkhEUTJtVFZvIn0.eyJzdWIiOiJqZnJ0QDAxZm55OXZxYjY4ZzY0MGRkNzJuenowNDBzXC91c2Vyc1wvYWRtaW4iLCJzY3AiOiJtZW1iZXItb2YtZ3JvdXBzOmdyb3VwMTEgYXBpOioiLCJhdWQiOiJqZnJ0QDAxZm55OXZxYjY4ZzY0MGRkNzJuenowNDBzIiwiaXNzIjoiamZydEAwMWZueTl2cWI2OGc2NDBkZDcybnp6MDQwcyIsImlhdCI6MTYzODQ3MzY1OCwianRpIjoiZmE5OGJlZWQtYzJiYi00ZTVlLTg1OTYtNTcyZTk2YzIxZTI1In0.NmShSzQKhJtpkIa5-wpSF84cOZ8Hx8fJ6J_IbtTEeJf4m3XsVdvj-6nGzb9puqnxbjSqNfiOJM-l7PQO1qQ9a0maisFmeCIZDUlc3FPUuBKlxgIgnEAAs4G7TCb8vsLbYnlxBiqS9Y1ATvdDCF_FtuH0tDwKt6bhVNk58jTCcxh0hGDsDtQ11sCKuzfu9JI9Ke7O0OcJjCdV7EV4YB-Xe63GyA_wm0I1xbRSNCy-wC9uiIIPbHIk-J2sJBupm3sfwd0stqVcGzKG6wixuetaNU6jDUM-Kh2r1LsWt8EZcXOn39vCAhu8OptmK_SfpfqpUF-Q1XJckknGxRatzsZzag # env variable name for Artifactory access token
         # after running this action, the <username> tag contains ${env.ARTIFACTORY_USERNAME_REF} and <password> contains ${env.ARTIFACTORY_TOKEN_REF}
  
     - name: Build with Maven
