@@ -24,7 +24,7 @@ jobs:
  
     - name: Build with Maven
       env:
-          ARTIFACTORY_USERNAME_REF: ${{ARTIFACTORY_USERNAME}}
-          ARTIFACTORY_TOKEN_REF: ${{ secrets.ARTIFACTORY_TOKEN }}
+        ARTIFACTORY_USERNAME_REF: ${{ARTIFACTORY_USERNAME}}
+        ARTIFACTORY_TOKEN_REF: ${{ secrets.ARTIFACTORY_TOKEN }}
       run: mvn -B package
       
