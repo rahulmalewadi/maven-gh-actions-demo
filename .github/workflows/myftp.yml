@@ -18,7 +18,7 @@ jobs:
   
   get-repos:
     # The type of runner that the job will run on
-    runs-on: [self-hosted,ets,windows]
+    runs-on: [windows-latest]
     env:
       GITHUB_TOKEN: ${{secrets.PAT_TOKEN}}
       GITHUB_USER: rahulmalewadi
