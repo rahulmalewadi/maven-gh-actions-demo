@@ -21,9 +21,9 @@ jobs:
     runs-on: [self-hosted,ets,windows]
     env:
       GITHUB_TOKEN: ${{secrets.PAT_TOKEN}}
-      GITHUB_USER: manulife-gwam
+      GITHUB_USER: rahulmalewadi
       FILE: ${{github.event.inputs.filename}}
-      DIR: gwam-repo
+      DIR: rahulmalewadi
       
 
     # Steps represent a sequence of tasks that will be executed as part of the job
