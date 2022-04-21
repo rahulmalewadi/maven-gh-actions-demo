@@ -1,0 +1,8 @@
+[
+{
+        "Technology":  "Java",
+        "Githubrepo":  "maven-gh-actions-demo",
+        "Repo":  "git@github.com:rahulmalewadi/maven-gh-actions-demo.git",
+	"branches":  ["develop","master"]
+    }
+  ]
