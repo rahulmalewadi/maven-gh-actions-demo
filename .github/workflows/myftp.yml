@@ -91,7 +91,7 @@ jobs:
   jobs:
     name: deploy-sftp
     needs: [get-repos]
-    runs-on: [ets,linux,x64,self-hosted]
+    runs-on: [ubuntu-latest]
     env:
       DIR: repositories
     steps:
