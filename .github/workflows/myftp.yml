@@ -104,8 +104,12 @@ jobs:
         run: |
            printf "%s" "${{env.ssh_private_key}}" >> ${{env.mykey}}
            chmod 600 ${{env.mykey}}
-           sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
-           put repositories
+           #sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
+           echo 'sftp start'
+           
+           printf "%s" "put -r repositories" >$TEMP_SFTP_FILE
+           sftp -b $TEMP_SFTP_FILE -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
+           
         env:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           mykey: ../private_key.pem
