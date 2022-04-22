@@ -103,7 +103,7 @@ jobs:
       - name: sftp-deploy
         run: |
            printf "%s" "${{env.ssh_private_key}}" >> ${{env.mykey}}
-           sftp -i ${{env.mykey}} ec2-user@44.202.70.126
+           sftp  StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
            put repositories
         env:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
