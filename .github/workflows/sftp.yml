@@ -28,12 +28,12 @@ jobs:
            #sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
            echo 'sftp start'
            
-           
-           sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
+           printf "%s" "put -r repositories /home/ec2-user" >${{env.temp_sftp_file}}
+           sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
            ls
            put pom.xml 
         env:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           mykey: ../private_key.pem
-          temp_sftp_file: put -r repositories
+          temp_sftp_file: ../sftp
      
