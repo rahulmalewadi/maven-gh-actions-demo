@@ -10,16 +10,19 @@ on:
         default: repo.json
         required: true
         description: please provide json filename
- jobs:
+jobs:
+  aws-serv-conn:
     name: deploy-sftp
-    needs: [get-repos]
+   
     runs-on: [ubuntu-latest]
     env:
       DIR: repositories
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-        
+      - name: download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: repos
+          path: ${{env.DIR}}
       - name: sftp-deploy
         run: |
            printf "%s" "${{env.ssh_private_key}}" >> ${{env.mykey}}
@@ -28,9 +31,7 @@ on:
            echo 'sftp start'
            
            
-           sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
-           put pom.xml 
-           ls
+           sftp -b put -r repositories /home/ec2-user -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
            
         env:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
