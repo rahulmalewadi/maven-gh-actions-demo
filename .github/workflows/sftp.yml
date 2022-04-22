@@ -19,10 +19,8 @@ jobs:
       DIR: repositories
     steps:
       - name: download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: repos
-          path: ${{env.DIR}}
+        uses: actions/checkout@v2
+        
       - name: sftp-deploy
         run: |
            printf "%s" "${{env.ssh_private_key}}" >> ${{env.mykey}}
@@ -31,8 +29,9 @@ jobs:
            echo 'sftp start'
            
            
-           sftp -b put -r repositories /home/ec2-user -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
-           
+           sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
+           ls
+           put pom.xml 
         env:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           mykey: ../private_key.pem
