@@ -1,0 +1,39 @@
+name: aws-connect
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+ 
+  workflow_dispatch:
+    inputs:
+      filename:
+        default: repo.json
+        required: true
+        description: please provide json filename
+ jobs:
+    name: deploy-sftp
+    needs: [get-repos]
+    runs-on: [ubuntu-latest]
+    env:
+      DIR: repositories
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        
+      - name: sftp-deploy
+        run: |
+           printf "%s" "${{env.ssh_private_key}}" >> ${{env.mykey}}
+           chmod 600 ${{env.mykey}}
+           #sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
+           echo 'sftp start'
+           
+           
+           sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
+           put pom.xml 
+           ls
+           
+        env:
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          mykey: ../private_key.pem
+          temp_sftp_file: put -r repositories
+     
