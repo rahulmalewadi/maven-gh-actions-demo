@@ -29,10 +29,10 @@ jobs:
            echo 'sftp start'
            
            echo "put -r src /home/ec2-user" >> ${{env.temp_sftp_file}}
-           ssh -i ${{env.mykey}} ec2-user@34.204.52.253
+           ssh -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@34.204.52.253
            #sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@34.204.52.253
-           ls
-           put pom.xml
+           #ls
+           #put pom.xml
         shell: powershell
         env:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
