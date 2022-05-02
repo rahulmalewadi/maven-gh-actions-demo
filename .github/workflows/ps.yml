@@ -36,6 +36,6 @@ jobs:
         shell: powershell
         env:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          mykey: ..\private_key.pem
-          temp_sftp_file: ..\sftp
+          mykey: .\private_key.pem
+          temp_sftp_file: .\sftp
      
