@@ -31,7 +31,7 @@ jobs:
            
            echo "put -r src /home/ec2-user" >> ${{env.temp_sftp_file}}
            icacls ${{env.mykey}} /inheritance:r
-           icacls ${{env.mykey}} /grant:r "%runneradmin%":"(R)"  
+           icacls ${{env.mykey}} /grant:r "%fv-az206-571\runneradmin%":"(R)"  
            ssh -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
            #sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
            #ls
