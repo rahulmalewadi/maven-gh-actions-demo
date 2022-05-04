@@ -29,7 +29,7 @@ jobs:
            echo 'sftp start'
            
            printf "%s" "put -r src /home/ec2-user" >${{env.temp_sftp_file}}
-           sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.204.110.172
+           sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
            
           
         env:
