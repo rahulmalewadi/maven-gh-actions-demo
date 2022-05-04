@@ -23,6 +23,7 @@ jobs:
         
       - name: sftp-deploy
         run: |
+           [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
            echo "${{env.ssh_private_key}}" |  Out-File -FilePath ${{env.mykey}}
           
            #sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
