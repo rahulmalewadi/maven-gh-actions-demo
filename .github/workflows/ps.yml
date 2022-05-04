@@ -23,14 +23,14 @@ jobs:
         
       - name: sftp-deploy
         run: |
-           echo "${{env.ssh_private_key}}" >> ${{env.mykey}}
+           echo "${{env.ssh_private_key}}" |  Out-File -FilePath ${{env.mykey}}
           
            #sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
            echo 'sftp start'
            
            echo "put -r src /home/ec2-user" >> ${{env.temp_sftp_file}}
-           ssh -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@34.204.52.253
-           #sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@34.204.52.253
+           ssh -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
+           #sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
            #ls
            #put pom.xml
         shell: powershell
