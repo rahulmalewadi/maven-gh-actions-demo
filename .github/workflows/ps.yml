@@ -29,7 +29,8 @@ jobs:
            echo 'sftp start'
            
            echo "put -r src /home/ec2-user" >> ${{env.temp_sftp_file}}
-             get-Acl -Path ".\pom.xml" | Set-Acl -Path "${{env.mykey}}"
+           icacls ${{env.mykey}} /inheritance:r
+           icacls ${{env.mykey}} /grant:r "%username%":"(R)"  
            ssh -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
            #sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
            #ls
