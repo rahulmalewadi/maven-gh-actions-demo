@@ -29,10 +29,30 @@ jobs:
           
            #sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
            echo 'sftp start'
+           New-Variable -Name Key -Value ${{env.mykey}}
+
+
+           Icacls $Key /c /t /Inheritance:d
+
+
+           Icacls $Key /c /t /Grant $USERNAME:F
+
+  
+            TakeOwn /F $Key
+            Icacls $Key /c /t /Grant:r $USERNAME:F
+
+
+           Icacls $Key /c /t /Remove:g Administrator "Authenticated Users" BUILTIN\Administrators BUILTIN Everyone System Users
+
+
+           Icacls $Key
+
+
+           Remove-Variable -Name Key
            
            echo "put -r src /home/ec2-user" >> ${{env.temp_sftp_file}}
-           icacls ${{env.mykey}} /inheritance:r
-           icacls ${{env.mykey}} /grant:r "%$USERNAME%":"(R)"  
+           #icacls ${{env.mykey}} /inheritance:r
+           #icacls ${{env.mykey}} /grant:r "%$USERNAME%":"(R)"  
            ssh -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
            #sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
            #ls
