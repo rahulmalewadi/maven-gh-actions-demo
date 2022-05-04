@@ -35,11 +35,11 @@ jobs:
            Icacls $Key /c /t /Inheritance:d
 
 
-           Icacls $Key /c /t /Grant $USERNAME:F
+           Icacls $Key /c /t /Grant ${env:UserName}:F
 
   
             TakeOwn /F $Key
-            Icacls $Key /c /t /Grant:r $USERNAME:F
+            Icacls $Key /c /t /Grant:r ${env:UserName}:F
 
 
            Icacls $Key /c /t /Remove:g Administrator "Authenticated Users" BUILTIN\Administrators BUILTIN Everyone System Users
