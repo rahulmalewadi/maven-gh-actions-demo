@@ -29,26 +29,28 @@ jobs:
           
            #sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
            echo 'sftp start'
-           New-Variable -Name Key -Value ${{env.mykey}}
+          
 
 
-           Icacls $Key /c /t /Inheritance:d
+           Icacls ${{env.mykey}} /c /t /Inheritance:d
 
 
-           Icacls $Key /c /t /Grant ${env:UserName}:F
+           Icacls ${{env.mykey}} /c /t /Grant ${env:UserName}:F
+           TakeOwn /F ${{env.mykey}}
+           Icacls ${{env.mykey}} /c /t /Grant:rx ${env:UserName}:F
+           Icacls ${{env.mykey}}
 
   
-            TakeOwn /F $Key
-            Icacls $Key /c /t /Grant:rx ${env:UserName}:F
+            
 
 
           
 
 
-           Icacls $Key
+          
 
 
-           Remove-Variable -Name Key
+           
            
            echo "put -r src /home/ec2-user" >> ${{env.temp_sftp_file}}
            #icacls ${{env.mykey}} /inheritance:r
@@ -60,6 +62,6 @@ jobs:
         shell: powershell
         env:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          mykey: .\private_key.pem
+          mykey: .\private_key
           temp_sftp_file: .\sftp
      
