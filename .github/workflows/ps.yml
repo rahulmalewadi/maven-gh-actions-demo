@@ -37,7 +37,7 @@ jobs:
 
            Icacls ${{env.mykey}} /c /t /Grant ${env:UserName}:F
            TakeOwn /F ${{env.mykey}}
-           Icacls ${{env.mykey}} /c /t /Grant:rx ${env:UserName}:F
+            #Icacls ${{env.mykey}} /c /t /Grant:rx ${env:UserName}:F
            Icacls ${{env.mykey}}
 
   
