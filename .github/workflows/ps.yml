@@ -23,22 +23,14 @@ jobs:
         
       - name: sftp-deploy
         run: |
-           $USERNAME = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
-           echo $USERNAME
-           echo "${{env.ssh_private_key}}" |  Out-File -FilePath ${{env.mykey}}
-          
+           printf "%s" "${{env.ssh_private_key}}" >> ${{env.mykey}}
+           chmod 600 ${{env.mykey}}
            #sftp -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@44.202.70.126
            echo 'sftp start'
-          
-
-
-           Icacls ${{env.mykey}} /c /t /Inheritance:d
-
-
-           Icacls ${{env.mykey}} /c /t /Grant ${env:UserName}:F
-           TakeOwn /F ${{env.mykey}}
-            #Icacls ${{env.mykey}} /c /t /Grant:rx ${env:UserName}:F
-           Icacls ${{env.mykey}}
+           
+           printf "%s" "put -r src /home/ec2-user" >${{env.temp_sftp_file}}
+           sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
+        shell: bash
 
   
             
@@ -52,16 +44,9 @@ jobs:
 
            
            
-           echo "put -r src /home/ec2-user" >> ${{env.temp_sftp_file}}
-           #icacls ${{env.mykey}} /inheritance:r
-           #icacls ${{env.mykey}} /grant:r "%$USERNAME%":"(R)"  
-           ssh -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
-           #sftp -b ${{env.temp_sftp_file}} -o StrictHostKeyChecking=no -i ${{env.mykey}} ec2-user@54.242.105.57
-           #ls
-           #put pom.xml
-        shell: powershell
+          
         env:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          mykey: .\private_key
-          temp_sftp_file: .\sftp
+          mykey: ../private_key.pem
+          temp_sftp_file: ../sftp
      
